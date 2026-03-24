@@ -1,3 +1,0 @@
-[submodule "r8152"]
-	path = r8152
-	url = https://github.com/wget/realtek-r8152-linux.git
