@@ -1,0 +1,57 @@
+--- compatibility.h
++++ compatibility.h
+@@ -16,15 +16,7 @@
+ #endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(3,7,0) */
+ #endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,31) */
+ 
+-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,5,0)
+-	#define NETIF_F_CSUM_MASK			NETIF_F_ALL_CSUM
+-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,1,0)
+-	#define IS_REACHABLE(option)			(defined(option) || \
+-							 (defined(option##_MODULE) && defined(MODULE)))
+-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,0,0)
+-	#define skb_vlan_tag_present(__skb)		vlan_tx_tag_present(__skb)
+-	#define skb_vlan_tag_get(__skb)			vlan_tx_tag_get(__skb)
+-	#define skb_vlan_tag_get_id(__skb)		vlan_tx_tag_get_id(__skb)
++
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(3,19,0)
+ 	#define napi_alloc_skb(napi, length)		netdev_alloc_skb_ip_align(netdev,length)
+ 	#define napi_complete_done(n, d)		napi_complete(n)
+@@ -447,9 +439,21 @@
+ #endif /* LINUX_VERSION_CODE < KERNEL_VERSION(3,15,0) */
+ #endif /* LINUX_VERSION_CODE < KERNEL_VERSION(3,16,0) */
+ #endif /* LINUX_VERSION_CODE < KERNEL_VERSION(3,19,0) */
+-#endif /* LINUX_VERSION_CODE < KERNEL_VERSION(4,0,0) */
+-#endif /* LINUX_VERSION_CODE < KERNEL_VERSION(4,1,0) */
+-#endif /* LINUX_VERSION_CODE < KERNEL_VERSION(4,5,0) */
++
++#if (defined(RHEL_RELEASE_CODE) && \
++(RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(7, 5)))
++#define ndo_change_mtu ndo_change_mtu_rh74
++#endif
++
++#if (defined(RHEL_RELEASE_CODE) && \
++(RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(7, 5)))
++#define ndo_change_mtu ndo_change_mtu_rh74
++#endif
++
++#if (defined(RHEL_RELEASE_CODE) && \
++(RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(7, 5)))
++#define ndo_change_mtu ndo_change_mtu_rh74
++#endif
+ 
+ #ifndef FALSE
+ 	#define TRUE	1
+@@ -451,6 +451,11 @@
+ #endif /* LINUX_VERSION_CODE < KERNEL_VERSION(4,1,0) */
+ #endif /* LINUX_VERSION_CODE < KERNEL_VERSION(4,5,0) */
+ 
++#if (defined(RHEL_RELEASE_CODE) && \
++(RHEL_RELEASE_CODE >= RHEL_RELEASE_VERSION(7, 5)))
++#define ndo_change_mtu ndo_change_mtu_rh74
++#endif
++
+ #ifndef FALSE
+ 	#define TRUE	1
+ 	#define FALSE	0
+
