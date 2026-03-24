@@ -24,7 +24,7 @@ License: GPLv2
 URL:     http://www.realtek.com.tw/
 
 # Sources.
-Source0:  realtek-%{kmod_name]-%{version}.tar.gz
+Source0:  realtek-%{kmod_name]-linux-%{version}.tar.gz
 Source10: kmodtool-%{kmod_name}.sh
 Source20: Repo-Makefile-%{kmod_name}
 Patch0:  %{kmod_name}.patch
