@@ -4,8 +4,8 @@
 
 # (un)define the next line to either build for the newest or all current kernels
 %define buildforkernels newest
-#define buildforkernels current
-#define buildforkernels akmod
+%define buildforkernels current
+%define buildforkernels akmod
 
 
 
@@ -24,8 +24,7 @@ License: GPLv2
 URL:     http://www.realtek.com.tw/
 
 # Sources.
-Source0:  r8152-%{version}.tar.bz2
-Source5:  GPL-v2.0.txt
+Source0:  realtek-%{kmod_name]-%{version}.tar.gz
 Source10: kmodtool-%{kmod_name}.sh
 Source20: Repo-Makefile-%{kmod_name}
 Patch0:  %{kmod_name}.patch
@@ -92,7 +91,6 @@ done
 %{__install} -d ${RPM_BUILD_ROOT}%{_sysconfdir}/depmod.d/
 %{__install} kmod-%{kmod_name}.conf ${RPM_BUILD_ROOT}%{_sysconfdir}/depmod.d/
 %{__install} -d ${RPM_BUILD_ROOT}%{_defaultdocdir}/kmod-%{kmod_name}-%{version}/
-%{__install} %{SOURCE5} ${RPM_BUILD_ROOT}%{_defaultdocdir}/kmod-%{kmod_name}-%{version}/
 %{__install} -d ${RPM_BUILD_ROOT}%{_sysconfdir}/udev/rules.d/
 #%{__install} 50-usb-realtek-net.rules ${RPM_BUILD_ROOT}%{_sysconfdir}/udev/rules.d/
 %{__install} ReadMe.txt ${RPM_BUILD_ROOT}%{_defaultdocdir}/kmod-%{kmod_name}-%{version}/
