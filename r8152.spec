@@ -18,8 +18,6 @@ Requires: %{name}-kmod >= %{version}
 
 
 
-
-BuildRequires:  cabextract
 # UDev rule location (_udevrulesdir) and systemd macros:
 BuildRequires:  systemd-rpm-macros
 
@@ -35,11 +33,11 @@ mkdir -p %{buildroot}%{_udevrulesdir}
 
 # Blacklist:
 install -D -m 0644 50-usb-realtek-net.rules %{buildroot}%{_udevrulesdir}50-usb-realtek-net.rules
-install -D -m 0644 LICENCE %{buildroot}%{_datarootdir}/licenses/%{name}/LICENSE
+install -D -m 0644 LICENSE %{buildroot}%{_datarootdir}/licenses/%{name}/LICENSE
 
 %files
 %license LICENSE
-%doc README.md
-
+%doc ReadMe.txt
+%{_udevrulesdir}50-usb-realtek-net.rules
 
 %changelog

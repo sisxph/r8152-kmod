@@ -27,25 +27,24 @@ Linux kernel driver for realtek r81xx usb network adapters
 # Print kmodtool output for debugging purposes:
 kmodtool  --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} %{?kernels:--for-kernels "%{?kernels}"} 2>/dev/null
 
-%autosetup -p1 -n realtek-r8152-linux-master
+%autosetup  -n realtek-r8152-linux-master
 
 for kernel_version in %{?kernel_versions}; do
-    mkdir _kmod_build_${kernel_version%%___*}
-    cp -fr 50-usb-realtek-net.rules compatibility.h Makefile r8152.c Kbuild _kmod_build_${kernel_version%%___*}
+    mkdir -p _kmod_build_${kernel_version%%___*}
+    cp -a 50-usb-realtek-net.rules compatibility.h Makefile r8152.c _kmod_build_${kernel_version%%___*}
 done
 
 %build
 for kernel_version in %{?kernel_versions}; do
     pushd _kmod_build_${kernel_version%%___*}/
-        %make_build -C "${kernel_version##*___}" M=$(pwd) VERSION="v%{version}" modules
+        make modules
     popd
 done
 
 %install
 for kernel_version in %{?kernel_versions}; do
     mkdir -p %{buildroot}/%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
-    install -p -m 0755 _kmod_build_${kernel_version%%___*}/*.ko \
-        %{buildroot}/%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
+	install -m 0755 _kmod_build_${kernel_version%%___*}/*.ko %{buildroot}/%{kmodinstdir_prefix}/${kernel_version%%___*}/%{kmodinstdir_postfix}/
 done
 %{?akmod_install}
 
