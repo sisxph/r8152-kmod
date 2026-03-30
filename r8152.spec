@@ -15,12 +15,6 @@ Source0:  %{url}/archive/refs/heads/master.tar.gz
 Provides: %{name}-kmod-common = %{version}
 Requires: %{name}-kmod >= %{version}
 
-
-
-
-# UDev rule location (_udevrulesdir) and systemd macros:
-#BuildRequires:  systemd-rpm-macros
-
 %description
 Linux kernel driver for realtek r81xx usb network adapters
 
@@ -30,8 +24,6 @@ Linux kernel driver for realtek r81xx usb network adapters
 
 %install
 mkdir -p %{buildroot}/usr/lib/udev/rules.d/
-
-# Blacklist:
 install -D -m 0644 50-usb-realtek-net.rules %{buildroot}/usr/lib/udev/rules.d/50-usb-realtek-net.rules
 install -D -m 0644 LICENSE %{buildroot}%{_datarootdir}/licenses/%{name}/LICENSE
 
