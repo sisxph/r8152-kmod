@@ -11,7 +11,7 @@ License:        GPLv2
 URL:            https://github.com/wget/realtek-r8152-linux
 
 Source:         %{url}/archive/refs/heads/master.tar.gz
-
+Patch:          https://raw.githubusercontent.com/sisxph/r8152-kmod/refs/heads/main/Makefile.patch
 # Get the needed BuildRequires (in parts depending on what we build for):
 BuildRequires:  kmodtool
 
