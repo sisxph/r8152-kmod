@@ -1,0 +1,20 @@
+--- Makefile	2025-11-28 16:15:54.000000000 +0100
++++ Makefilep	2026-04-02 11:55:36.296220291 +0200
+@@ -3,7 +3,7 @@
+ #
+ 
+ CONFIG_CTAP_SHORT = ON
+-
++KERNELVER = $(shell uname -r)
+ ifneq ($(KERNELRELEASE),)
+ 	obj-m	 := r8152.o
+ #	ccflags-y += -DRTL8152_S5_WOL
+@@ -20,7 +20,7 @@
+ 		ccflags-y += -DLINUX_VERSION_SUBLEVEL=$(SUBLEVEL)
+ 	endif
+ else
+-	KERNELDIR ?= /lib/modules/$(shell uname -r)/build
++	KERNELDIR ?= /lib/modules/$(KERNELVER)/build
+ 	PWD :=$(shell pwd)
+ 	TARGET_PATH := kernel/drivers/net/usb
+ 	INBOXDRIVER := $(shell find $(subst build,$(TARGET_PATH),$(KERNELDIR)) -name r8152.ko.* -type f)
