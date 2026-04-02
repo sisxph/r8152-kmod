@@ -5,7 +5,7 @@
 
 Name:           r8152-kmod
 Version:        2.21.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Linux kernel driver for realtek r81xx usb network adapters
 License:        GPLv2
 URL:            https://github.com/wget/realtek-r8152-linux
@@ -27,8 +27,7 @@ Linux kernel driver for realtek r81xx usb network adapters
 # Print kmodtool output for debugging purposes:
 kmodtool  --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} %{?kernels:--for-kernels "%{?kernels}"} 2>/dev/null
 
-%autosetup  -v realtek-r8152-linux-master
-%patch -P0
+%autosetup  -n realtek-r8152-linux-master
 
 for kernel_version in %{?kernel_versions}; do
     mkdir -p _kmod_build_${kernel_version%%___*}
