@@ -37,7 +37,7 @@ done
 %build
 for kernel_version in %{?kernel_versions}; do
     pushd _kmod_build_${kernel_version%%___*}/
-        make modules
+        make KERNELVER=${kernel_version%%___*} modules
     popd
 done
 
