@@ -11,7 +11,7 @@ License:        GPLv2
 URL:            https://github.com/wget/realtek-r8152-linux
 
 Source:         %{url}/archive/refs/heads/master.tar.gz
-Patch:          https://raw.githubusercontent.com/sisxph/r8152-kmod/refs/heads/main/Makefile.patch
+Patch0:          https://raw.githubusercontent.com/sisxph/r8152-kmod/refs/heads/main/Makefile.patch
 # Get the needed BuildRequires (in parts depending on what we build for):
 BuildRequires:  kmodtool
 
@@ -27,7 +27,8 @@ Linux kernel driver for realtek r81xx usb network adapters
 # Print kmodtool output for debugging purposes:
 kmodtool  --target %{_target_cpu} --kmodname %{name} %{?buildforkernels:--%{buildforkernels}} %{?kernels:--for-kernels "%{?kernels}"} 2>/dev/null
 
-%autosetup  -n realtek-r8152-linux-master
+%autosetup  -v realtek-r8152-linux-master
+%patch -P0
 
 for kernel_version in %{?kernel_versions}; do
     mkdir -p _kmod_build_${kernel_version%%___*}
